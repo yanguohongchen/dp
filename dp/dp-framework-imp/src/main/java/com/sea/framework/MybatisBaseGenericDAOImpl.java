@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import com.sea.exception.BaseDaoException;
@@ -40,6 +42,12 @@ public abstract class MybatisBaseGenericDAOImpl<T, ID extends Serializable> exte
 	/** 不能用于SQL中的非法字符（主要用于排序字段名） */
 	public static final String[] ILLEGAL_CHARS_FOR_SQL = { ",", ";", " ", "\"", "%" };
 
+	@Autowired
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory)
+	{
+		super.setSqlSessionFactory(sqlSessionFactory);
+	}
+
 	/**
 	 * 获取默认SqlMapping命名空间。 使用泛型参数中业务实体类型的全限定名作为默认的命名空间。
 	 * 如果实际应用中需要特殊的命名空间，可由子类重写该方法实现自己的命名空间规则。
@@ -49,8 +57,10 @@ public abstract class MybatisBaseGenericDAOImpl<T, ID extends Serializable> exte
 	@SuppressWarnings("unchecked")
 	protected String getDefaultSqlNamespace()
 	{
-		Class<T> clazz = ReflectGeneric.getClassGenricType(this.getClass());
+		Class<T> clazz = ReflectGeneric.getInterfaceType(this.getClass());
+		
 		String nameSpace = clazz.getName();
+		System.out.println(nameSpace);
 		return nameSpace;
 	}
 
@@ -607,4 +617,7 @@ public abstract class MybatisBaseGenericDAOImpl<T, ID extends Serializable> exte
 	{
 		this.getSqlSession().select(getSqlName(statement), handler);
 	}
+	
+	
+	
 }

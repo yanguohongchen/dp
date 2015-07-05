@@ -9,5 +9,14 @@ import com.sea.user.model.UserEntity;
 public class UserDao extends MybatisBaseGenericDAOImpl<UserEntity, Long> implements UserEntityMapper
 {
 
+	
+	public static void main(String[] args)
+	{
+		Class<?>[] a = new UserDao().getClass().getInterfaces();
+		
+		for(Class cla:a){
+			System.out.println(cla.getName());
+		}
+	}
 
 }

@@ -38,6 +38,7 @@ public class UserAction extends BaseAction
 	private IUserService userService;
 	
 	
+	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public MsgResult add(UserEntity user){
 		

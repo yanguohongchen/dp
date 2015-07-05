@@ -21,6 +21,18 @@ public class ReflectGeneric
 	{
 		return getClassGenricType(clazz, 0);
 	}
+	
+	@SuppressWarnings({ "rawtypes" })
+	public static Class getInterfaceType(final Class clazz){
+		
+		Class<?>[] a =clazz.getInterfaces();
+		if(a.length>0){
+			return a[0];
+		}else{
+			return null;
+		}
+		
+	}
 
 	/**
 	 * 根据参数索引获得参数化类型的泛型类型，（通过索引取得）
@@ -50,4 +62,7 @@ public class ReflectGeneric
 		}
 		return (Class) params[index];
 	}
+	
+	
+	
 }
