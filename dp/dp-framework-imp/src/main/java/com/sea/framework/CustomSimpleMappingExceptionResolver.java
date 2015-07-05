@@ -11,6 +11,7 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 /**
  * 异常处理模型
+ * 
  * @author sea
  *
  */
@@ -24,7 +25,8 @@ public class CustomSimpleMappingExceptionResolver extends SimpleMappingException
 		String viewName = determineViewName(ex, request);
 		if (viewName != null)
 		{
-			if (!(request.getHeader("accept").indexOf("application/json") > -1 || (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").indexOf("XMLHttpRequest") > -1)||request.getParameter("callback") != null))
+			if (!(request.getHeader("accept").indexOf("application/json") > -1
+					|| (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").indexOf("XMLHttpRequest") > -1) || request.getParameter("callback") != null))
 			{
 				// 不是异步请求
 				// Apply HTTP status code for error views, if specified.

@@ -2,12 +2,12 @@ package com.sea.action;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Person
 {
 
-	private String name ;
-	
+	private String name;
+
 	private Integer age;
 
 	public String getName()
@@ -29,7 +29,5 @@ public class Person
 	{
 		this.age = age;
 	}
-	
-	
-	
+
 }

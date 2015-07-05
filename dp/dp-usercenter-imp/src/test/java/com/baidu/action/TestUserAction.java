@@ -26,9 +26,11 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @Configuration
-@WebAppConfiguration("file:../dp-web/src/main/resources/applicationContext.xml") //此处路径跟xml中一致
-@TestPropertySource("file:../dp-web/src/main/resources/log4j.properties") //此处路径跟xml中一致
-@ContextConfiguration("file:../dp-web/src/main/webapp/WEB-INF/spring-servlet.xml") 
+@WebAppConfiguration("file:../dp-web/src/main/resources/applicationContext.xml")
+// 此处路径跟xml中一致
+@TestPropertySource("file:../dp-web/src/main/resources/log4j.properties")
+// 此处路径跟xml中一致
+@ContextConfiguration("file:../dp-web/src/main/webapp/WEB-INF/spring-servlet.xml")
 public class TestUserAction
 {
 	@Autowired

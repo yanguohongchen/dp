@@ -17,6 +17,6 @@ public class BaseAction
 		return new ModelAndView().addObject("error", ex.getMessage()).addObject("code", "1");
 	}
 
-	protected MsgResult msgResult = new MsgResult();
+	
 
 }

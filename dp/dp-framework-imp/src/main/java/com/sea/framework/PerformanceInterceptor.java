@@ -24,7 +24,7 @@ public class PerformanceInterceptor implements HandlerInterceptor
 
 	private long requestStrartTime;
 	private DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:ms");
-	
+
 	/**
 	 * 是否开启性能监控
 	 */
@@ -33,7 +33,8 @@ public class PerformanceInterceptor implements HandlerInterceptor
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
 	{
-		if(performance){
+		if (performance)
+		{
 			requestStrartTime = System.currentTimeMillis();
 			logger.debug("URI:" + request.getRequestURI() + "，开始时间 :" + df.format(new Date()));
 		}
@@ -43,14 +44,15 @@ public class PerformanceInterceptor implements HandlerInterceptor
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception
 	{
-		
+
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception
 	{
-		
-		if(performance){
+
+		if (performance)
+		{
 			long requestEndTime = System.currentTimeMillis();
 			long requestTime = requestEndTime - requestStrartTime;
 			logger.debug("URI:" + request.getRequestURI() + "，结束时间 :" + df.format(new Date()));

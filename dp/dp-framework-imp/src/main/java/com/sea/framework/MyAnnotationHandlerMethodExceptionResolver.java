@@ -107,8 +107,7 @@ public class MyAnnotationHandlerMethodExceptionResolver extends ExceptionHandler
 
 	}
 
-	@SuppressWarnings(
-	{ "unchecked", "rawtypes", "resource" })
+	@SuppressWarnings({ "unchecked", "rawtypes", "resource" })
 	private ModelAndView handleResponseBody(ModelAndView returnValue, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Map value = returnValue.getModelMap();

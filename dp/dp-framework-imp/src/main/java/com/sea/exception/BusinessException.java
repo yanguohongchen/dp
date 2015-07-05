@@ -2,6 +2,7 @@ package com.sea.exception;
 
 /**
  * 业务异常
+ * 
  * @author sea
  *
  */

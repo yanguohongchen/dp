@@ -1,12 +1,11 @@
 package com.sea.framework;
 
-
 public class MsgResult
 {
 	private String code = "0";
-	
+
 	private String msg = "success";
-	
+
 	protected Object returnData;
 
 	public String getCode()
@@ -39,6 +38,4 @@ public class MsgResult
 		this.returnData = returnData;
 	}
 
-	
-	
 }

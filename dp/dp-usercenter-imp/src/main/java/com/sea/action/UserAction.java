@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,26 +24,44 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sea.exception.BusinessException;
 import com.sea.framework.BaseAction;
 import com.sea.framework.MsgResult;
+import com.sea.user.api.IUserService;
+import com.sea.user.model.UserEntity;
 
 @Controller
 @RequestMapping(value = "/user")
 public class UserAction extends BaseAction
 {
 
-	@RequestMapping(value="test",method= RequestMethod.GET)
-	@ResponseBody
-	public User test(User user){
-		return user;
+	protected MsgResult msgResult = new MsgResult();
+	
+	@Autowired
+	private IUserService userService;
+	
+	
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public MsgResult add(UserEntity user){
+		
+		userService.save(user);
+		
+		return new MsgResult();
 	}
 	
+	
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	@ResponseBody
+	public UserView test(UserView user)
+	{
+		return user;
+	}
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
 	public MsgResult getList() throws Exception
 	{
 		// System.out.println("test...");
-		Map<String,Object> map = new HashMap<>();
-		List<User> list = new ArrayList<>();
-		User user1 = new User();
+		Map<String, Object> map = new HashMap<>();
+		List<UserView> list = new ArrayList<>();
+		UserView user1 = new UserView();
 		user1.setEmail("2323");
 		user1.setMobile("232323");
 		user1.setPasswd("232323");
@@ -60,20 +79,23 @@ public class UserAction extends BaseAction
 
 	/**
 	 * 获取信息列表
-	 * @param test 参数1
-	 * @param user 用户信息
+	 * 
+	 * @param test
+	 *            参数1
+	 * @param user
+	 *            用户信息
 	 * @return 用户详细信息
 	 * @author sea
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/list2", method = RequestMethod.GET)
 	@ResponseBody
-	public User getList2(int test, User user) throws Exception
+	public UserView getList2(int test, UserView user) throws Exception
 	{
-		 System.out.println("test2...");
-		 System.out.println(test);
-		 System.out.println(user.getUsername());
-		if(test ==2)
+		System.out.println("test2...");
+		System.out.println(test);
+		System.out.println(user.getUsername());
+		if (test == 2)
 		{
 			throw new BusinessException("参数不能等于2！");
 		}
@@ -96,28 +118,27 @@ public class UserAction extends BaseAction
 		System.out.println("success");
 		return "redirect:/html/success/uploadsuccess.html";
 	}
-	
-	
-	
-	@RequestMapping(value="/uploadFile",method=RequestMethod.POST)
+
+	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
-	public Person uploadFile(HttpServletResponse response,HttpServletRequest request,@RequestParam(value="file", required=false) MultipartFile file) throws IOException{
-        byte[] bytes = file.getBytes();
+	public Person uploadFile(HttpServletResponse response, HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file) throws IOException
+	{
+		byte[] bytes = file.getBytes();
 		System.out.println(file.getOriginalFilename());
 		@SuppressWarnings("deprecation")
-		String uploadDir = request.getRealPath("/")+"upload";
-        File dirPath = new File(uploadDir);
-        if (!dirPath.exists()) {
-            dirPath.mkdirs();
-        }
-        String sep = System.getProperty("file.separator");
-        File uploadedFile = new File(uploadDir + sep
-                + file.getOriginalFilename());
-        FileCopyUtils.copy(bytes, uploadedFile);
-        Person person = new Person();
+		String uploadDir = request.getRealPath("/") + "upload";
+		File dirPath = new File(uploadDir);
+		if (!dirPath.exists())
+		{
+			dirPath.mkdirs();
+		}
+		String sep = System.getProperty("file.separator");
+		File uploadedFile = new File(uploadDir + sep + file.getOriginalFilename());
+		FileCopyUtils.copy(bytes, uploadedFile);
+		Person person = new Person();
 		person.setName("zhang");
 		person.setAge(22);
-        return person;
+		return person;
 	}
 
 }
