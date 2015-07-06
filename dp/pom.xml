@@ -16,6 +16,7 @@
 		<module>dp-dubboDemo-provider</module>
 		<module>dp-dubboDemo-api</module>
 		<module>dp-dubboDemo-consumer</module>
+		<module>dp-angularjs-web</module>
 	</modules>
 
 
