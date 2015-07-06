@@ -7,5 +7,24 @@
   </parent>
   <artifactId>dp-angularjs-web</artifactId>
   <packaging>war</packaging>
+  
+  
+	<dependencies>
+		<!-- project dependences -->
+
+		<dependency>
+			<groupId>com.sea</groupId>
+			<artifactId>dp-framework-imp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sea</groupId>
+			<artifactId>dp-usercenter-imp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sea</groupId>
+			<artifactId>dp-dubboDemo-provider</artifactId>
+		</dependency>
+
+	</dependencies>
   <build/>
 </project>
