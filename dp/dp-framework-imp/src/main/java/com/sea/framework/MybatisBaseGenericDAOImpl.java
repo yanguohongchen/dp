@@ -42,6 +42,10 @@ public abstract class MybatisBaseGenericDAOImpl<T, ID extends Serializable> exte
 	/** 不能用于SQL中的非法字符（主要用于排序字段名） */
 	public static final String[] ILLEGAL_CHARS_FOR_SQL = { ",", ";", " ", "\"", "%" };
 
+	
+	/**
+	 * mybatis支持多数据源。所以数据源需要自己注入
+	 */
 	@Autowired
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory)
 	{
@@ -60,7 +64,6 @@ public abstract class MybatisBaseGenericDAOImpl<T, ID extends Serializable> exte
 		Class<T> clazz = ReflectGeneric.getInterfaceType(this.getClass());
 		
 		String nameSpace = clazz.getName();
-		System.out.println(nameSpace);
 		return nameSpace;
 	}
 

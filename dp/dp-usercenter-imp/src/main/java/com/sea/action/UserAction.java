@@ -43,8 +43,9 @@ public class UserAction extends BaseAction
 	public MsgResult add(UserEntity user){
 		
 		userService.save(user);
-		
-		return new MsgResult();
+		MsgResult msgResult = new MsgResult();
+		msgResult.setReturnData(user);
+		return msgResult;
 	}
 	
 	

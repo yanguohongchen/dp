@@ -12,6 +12,7 @@
 		<module>dp-web</module>
 		<module>dp-usercenter-imp</module>
 		<module>dp-usercenter-api</module>
+		<module>dp-test</module>
 	</modules>
 
 
