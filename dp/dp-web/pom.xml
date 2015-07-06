@@ -20,6 +20,10 @@
 			<groupId>com.sea</groupId>
 			<artifactId>dp-usercenter-imp</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.sea</groupId>
+			<artifactId>dp-dubboDemo-provider</artifactId>
+		</dependency>
 
 	</dependencies>
 

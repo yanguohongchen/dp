@@ -12,6 +12,11 @@
 
 
 		<dependency>
+			<groupId>com.sea</groupId>
+			<artifactId>dp-framework-api</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
@@ -160,12 +165,23 @@
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 		</dependency>
-
-
+		
+		
 		<dependency>
-			<groupId>com.sea</groupId>
-			<artifactId>dp-framework-api</artifactId>
-		</dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>com.github.sgroschupf</groupId>
+				<artifactId>zkclient</artifactId>
+			</dependency>
+		
 	</dependencies>
 	<build />
 </project>

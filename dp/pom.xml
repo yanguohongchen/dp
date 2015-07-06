@@ -13,6 +13,9 @@
 		<module>dp-usercenter-imp</module>
 		<module>dp-usercenter-api</module>
 		<module>dp-test</module>
+		<module>dp-dubboDemo-provider</module>
+		<module>dp-dubboDemo-api</module>
+		<module>dp-dubboDemo-consumer</module>
 	</modules>
 
 
@@ -28,7 +31,49 @@
 		<dependencies>
 
 
+			<!-- project dependent jar -->
 
+			<dependency>
+				<groupId>com.sea</groupId>
+				<artifactId>dp-framework-imp</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sea</groupId>
+				<artifactId>dp-framework-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sea</groupId>
+				<artifactId>dp-usercenter-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sea</groupId>
+				<artifactId>dp-usercenter-imp</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sea</groupId>
+				<artifactId>dp-dubboDemo-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>com.sea</groupId>
+				<artifactId>dp-dubboDemo-provider</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sea</groupId>
+				<artifactId>dp-dubboDemo-consumer</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- spring -->
 			<dependency>
@@ -153,7 +198,6 @@
 				<version>1.1.3</version>
 			</dependency>
 
-
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
@@ -212,29 +256,24 @@
 				<version>1.0.3</version>
 			</dependency>
 
-			<!-- project dependent jar -->
+			<!-- dubbo -->
 
 			<dependency>
-				<groupId>com.sea</groupId>
-				<artifactId>dp-framework-imp</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sea</groupId>
-				<artifactId>dp-framework-api</artifactId>
-				<version>${project.version}</version>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>2.5.3</version>
 			</dependency>
 
 			<dependency>
-				<groupId>com.sea</groupId>
-				<artifactId>dp-usercenter-api</artifactId>
-				<version>${project.version}</version>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+				<version>3.4.6</version>
 			</dependency>
 
 			<dependency>
-				<groupId>com.sea</groupId>
-				<artifactId>dp-usercenter-imp</artifactId>
-				<version>${project.version}</version>
+				<groupId>com.github.sgroschupf</groupId>
+				<artifactId>zkclient</artifactId>
+				<version>0.1</version>
 			</dependency>
 
 
