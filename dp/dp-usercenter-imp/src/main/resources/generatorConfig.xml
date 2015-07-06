@@ -13,7 +13,7 @@
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://127.0.0.1:3306/dp_db?generateSimpleParameterMetadata=true"
 			userId="root"
-			password="newpass">
+			password="root">
 		</jdbcConnection>
 
 		<javaTypeResolver >
@@ -47,7 +47,6 @@
 		<table schema=""  tableName="t_history" domainObjectName="History"   enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 		<table schema=""  tableName="t_count_time" domainObjectName="CountTime"   enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
 		<table schema=""  tableName="t_user" domainObjectName="UserEntity"    enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
-			<generatedKey column="userid" sqlStatement="Mysql"/>
 		</table>
 		<!-- <table schema=""  tableName="t_pashion" domainObjectName="Pashion"   enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
 

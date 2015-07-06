@@ -17,6 +17,9 @@ public class UserService implements IUserService
 	@Override
 	public void save(UserEntity user){
 		userDao.save(user);
+		
+		System.out.println(user.getUserid());
+		
 	}
 	
 	
