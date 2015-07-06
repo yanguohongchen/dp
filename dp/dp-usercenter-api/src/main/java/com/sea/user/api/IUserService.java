@@ -10,4 +10,6 @@ public interface IUserService
 
 	public UserEntity getEntity(long userid);
 
+	public void updateEntity(UserEntity user);
+
 }

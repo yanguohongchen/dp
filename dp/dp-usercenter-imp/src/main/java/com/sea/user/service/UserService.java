@@ -13,17 +13,28 @@ public class UserService implements IUserService
 
 	@Autowired
 	private UserEntityMapper userDao;
-	
+
 	@Override
-	public void save(UserEntity user){
+	public void save(UserEntity user)
+	{
 		userDao.save(user);
 	}
-	
+
 	@Override
-	public UserEntity getEntity(long userid){
+	public UserEntity getEntity(long userid)
+	{
 		return userDao.getById(userid);
+	}
+
+	@Override
+	public void updateEntity(UserEntity user)
+	{
+		userDao.update(user);
 	}
 	
 	
-	
+	public void getList(){
+//		userDao.findListBy(param, sort, dir);
+	}
+
 }
