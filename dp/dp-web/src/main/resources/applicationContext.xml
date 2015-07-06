@@ -88,7 +88,7 @@
 		<dubbo:protocol name="dubbo" port="20880" />  
 		 
 		  
-		<import resource="dubbo-demo-provider.xml"/>
+		<!-- <import resource="dubbo-demo-provider.xml"/> -->
 		<!-- <import resource="dubbo-demo-consumer.xml"/> -->
 		
 	</beans>
