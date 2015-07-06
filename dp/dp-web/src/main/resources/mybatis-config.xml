@@ -6,6 +6,6 @@
 	<typeAliases>
 	</typeAliases>
 	<mappers>
-		<mapper class="com.sea.user.dao.UserEntityMapper"/>
+		<mapper resource="com/sea/user/mapper/UserEntityMapper.xml"/>
 	</mappers>
 </configuration>
