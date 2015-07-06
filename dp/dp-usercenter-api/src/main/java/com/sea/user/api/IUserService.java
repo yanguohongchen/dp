@@ -8,4 +8,6 @@ public interface IUserService
 
 	public void save(UserEntity user);
 
+	public UserEntity getEntity(long userid);
+
 }

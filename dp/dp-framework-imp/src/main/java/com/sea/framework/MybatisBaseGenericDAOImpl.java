@@ -149,7 +149,7 @@ public abstract class MybatisBaseGenericDAOImpl<T, ID extends Serializable> exte
 	 * )
 	 */
 	@SuppressWarnings("unchecked")
-	public T getById(String id)
+	public T getById(long id)
 	{
 		return (T) this.getSqlSession().selectOne(getSqlName(SQL_GETBYID), id);
 	}

@@ -33,22 +33,32 @@ public class UserAction extends BaseAction
 {
 
 	protected MsgResult msgResult = new MsgResult();
-	
+
 	@Autowired
 	private IUserService userService;
-	
-	
+
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.GET)
-	public MsgResult add(UserEntity user){
-		
+	public MsgResult add(UserEntity user)
+	{
+
 		userService.save(user);
 		MsgResult msgResult = new MsgResult();
 		msgResult.setReturnData(user);
 		return msgResult;
 	}
-	
-	
+
+	@ResponseBody
+	@RequestMapping(value = "getById", method = RequestMethod.GET)
+	public MsgResult add(long userId)
+	{
+
+		UserEntity user = userService.getEntity(userId);
+		MsgResult msgResult = new MsgResult();
+		msgResult.setReturnData(user);
+		return msgResult;
+	}
+
 	@RequestMapping(value = "test", method = RequestMethod.GET)
 	@ResponseBody
 	public UserView test(UserView user)

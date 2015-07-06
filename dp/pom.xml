@@ -27,7 +27,7 @@
 	<dependencyManagement>
 		<dependencies>
 
-			
+
 
 
 			<!-- spring -->
@@ -192,12 +192,25 @@
 			</dependency>
 
 
-<dependency>
-	<groupId>commons-beanutils</groupId>
-	<artifactId>commons-beanutils</artifactId>
-	<version>1.9.2</version>
-</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.9.2</version>
+			</dependency>
 
+
+			<!-- ehcache -->
+			<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache</artifactId>
+				<version>2.9.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mybatis.caches</groupId>
+				<artifactId>mybatis-ehcache</artifactId>
+				<version>1.0.3</version>
+			</dependency>
 
 			<!-- project dependent jar -->
 
@@ -242,8 +255,8 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
-		
+
+
 	</build>
 
 </project>
