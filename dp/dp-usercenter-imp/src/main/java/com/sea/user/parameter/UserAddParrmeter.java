@@ -9,8 +9,6 @@ import org.hibernate.validator.constraints.Length;
 public class UserAddParrmeter implements java.io.Serializable
 {
 	//验证参数的使用地址
-	//http://my.oschina.net/u/241255/blog/297726
-	
 	
 	/**
 	 * 
