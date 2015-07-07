@@ -22,20 +22,20 @@ public class PerformanceInterceptor implements HandlerInterceptor
 {
 	private final static Logger logger = LoggerFactory.getLogger(PerformanceInterceptor.class.getName());
 
-	private long requestStrartTime;
 	private DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:ms");
 
 	/**
 	 * 是否开启性能监控
 	 */
-	private boolean performance = false;
+	private boolean performance = true;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
 	{
 		if (performance)
 		{
-			requestStrartTime = System.currentTimeMillis();
+			long requestStrartTime = System.currentTimeMillis();
+			 request.setAttribute("startTime", requestStrartTime);
 			logger.debug("URI:" + request.getRequestURI() + "，开始时间 :" + df.format(new Date()));
 		}
 		return true;
@@ -54,6 +54,7 @@ public class PerformanceInterceptor implements HandlerInterceptor
 		if (performance)
 		{
 			long requestEndTime = System.currentTimeMillis();
+			long requestStrartTime = (Long) request.getAttribute("startTime");
 			long requestTime = requestEndTime - requestStrartTime;
 			logger.debug("URI:" + request.getRequestURI() + "，结束时间 :" + df.format(new Date()));
 			logger.debug("URI:" + request.getRequestURI() + "，请求时间：" + String.valueOf(requestTime) + " ms");

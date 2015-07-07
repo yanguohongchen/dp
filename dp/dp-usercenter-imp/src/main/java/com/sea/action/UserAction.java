@@ -83,7 +83,7 @@ public class UserAction extends BaseAction
 		if(result.hasErrors())
 		{
 			FieldError fieldError = result.getFieldError();
-			throw new BusinessException("字段"+fieldError.getField()+":"+fieldError.getDefaultMessage());
+			throw new BusinessException(fieldError.getField()+":"+fieldError.getDefaultMessage());
 		}
 		
 		UserEntity userEntity = new UserEntity();
