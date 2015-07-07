@@ -195,6 +195,10 @@
 			<artifactId>hibernate-validator-annotation-processor</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>el-api</artifactId>
+		</dependency>
 	</dependencies>
 	<build />
 </project>

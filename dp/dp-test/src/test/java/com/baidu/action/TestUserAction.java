@@ -13,13 +13,14 @@ public class TestUserAction extends TestBaseAction
 	@Override
 	public void setup()
 	{
+		
 		super.setup();
 	}
 
 	@Test
 	public void userAdd() throws Exception
 	{
-		this.mockMvc.perform(get("/user/add").param("nickname", "3").param("username", "test111").param("passwd", "passwd")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(get("/user/userAdd").param("nickname", "1").param("username", "test111").param("passwd", "passwd")).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().contentType("application/json;charset=UTF-8"));
 	}
 
