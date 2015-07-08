@@ -1,5 +1,7 @@
 package com.sea.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class UserEntity implements java.io.Serializable{
     /**
 	 * 
@@ -28,6 +30,7 @@ public class UserEntity implements java.io.Serializable{
      *
      * @mbggenerated Sun Jul 05 20:48:36 CST 2015
      */
+    @JsonIgnore
     private String password;
 
     /**
@@ -52,6 +55,7 @@ public class UserEntity implements java.io.Serializable{
      *
      * @mbggenerated Sun Jul 05 20:48:36 CST 2015
      */
+    
     private String nickname;
 
     /**
@@ -60,6 +64,7 @@ public class UserEntity implements java.io.Serializable{
      *
      * @mbggenerated Sun Jul 05 20:48:36 CST 2015
      */
+   
     private String headimgurl;
 
     /**
