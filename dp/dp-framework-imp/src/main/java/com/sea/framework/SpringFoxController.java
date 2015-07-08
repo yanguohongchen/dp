@@ -22,20 +22,19 @@ import com.mangofactory.swagger.annotations.ApiIgnore;
 
 @Controller
 @ApiIgnore
-@RequestMapping("/api")
 public class SpringFoxController {
 
    private final static Log logger = LogFactory.getLog(SpringFoxController.class);
    private final static String COLON = ":";
    private final static String API_DOC = "/api-docs";
 
-   @RequestMapping("/")
+   @RequestMapping("/api")
    @ResponseBody
    public String api(HttpServletRequest request, HttpServletResponse response) throws IOException {
        //获取url地址
        String reqUrl = request.getRequestURL().toString();
        logger.info("api页面请求：" + reqUrl);
-       reqUrl = reqUrl.replace("api", "api") + "/index.html";
+       reqUrl = reqUrl.replace("api", "apidocs") + "/index.html";
        
 
 		BasicCookieStore cookieStore = new BasicCookieStore();
@@ -47,13 +46,15 @@ public class SpringFoxController {
 		String html = EntityUtils.toString(entity, "utf-8");
        
        //api url
-       String apiUrl = request.getServerName() + COLON + request.getServerPort() + API_DOC;
+       String apiUrl = request.getServerName() + COLON + request.getServerPort()+"/" +SpringfoxConfig.PROJECT_NAME+"/" + API_DOC;
+       
+       String htmUrl = "http://"+request.getServerName() + COLON + request.getServerPort()+"/" +SpringfoxConfig.PROJECT_NAME;
 
        //处理html页面内容,使其可以访问静态资源
        String body = html.replace("petstore.swagger.io/v2/swagger.json", apiUrl)
-               .replace("css/", "/api/css/")
-               .replace("lib/", "/api/lib/")
-               .replace("swagger-ui.js", "/api/swagger-ui.js");
+               .replace("css/", htmUrl+"/apidocs/css/")
+               .replace("lib/", htmUrl+"/apidocs/lib/")
+               .replace("swagger-ui.js", htmUrl+"/apidocs/swagger-ui.js");
        return body;
    }
 }
