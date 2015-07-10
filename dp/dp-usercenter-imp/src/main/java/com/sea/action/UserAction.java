@@ -36,6 +36,7 @@ import com.sea.user.parameter.UserAdd;
 import com.sea.user.parameter.UserAddParrmeter;
 import com.sea.user.parameter.UserAddParrmeter2;
 import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -81,7 +82,7 @@ public class UserAction extends BaseAction
 	
 	@ResponseBody
 	@RequestMapping(value = "userAddValidated", method = RequestMethod.GET)
-	public UserEntity UserAddValidated(@Validated({UserAdd.class}) UserAddParrmeter userAddParrmeter,BindingResult result) throws IllegalAccessException, InvocationTargetException, BusinessException
+	public UserEntity UserAddValidated(@ApiParam @Validated({UserAdd.class}) UserAddParrmeter userAddParrmeter,BindingResult result) throws IllegalAccessException, InvocationTargetException, BusinessException
 	{
 		if(result.hasErrors())
 		{
