@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sea.exception.BusinessException;
-import com.sea.framework.BaseAction;
 import com.sea.framework.MsgResult;
 import com.sea.user.api.IUserService;
 import com.sea.user.model.UserEntity;
@@ -37,7 +36,7 @@ import com.sea.user.parameter.UserAddParrmeter;
 
 @Controller
 @RequestMapping(value = "/user")
-public class UserAction extends BaseAction
+public class UserAction
 {
 
 	protected MsgResult msgResult = new MsgResult();
