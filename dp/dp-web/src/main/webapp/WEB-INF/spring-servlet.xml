@@ -24,20 +24,31 @@
 	<bean id="conversion-service"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
 
+
+	<bean id="jsonconvert"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+		<property name="prettyPrint" value="true" />
+	</bean>
+
 	<mvc:annotation-driven validator="validator">
 		<!-- 消息转换使用json格式 -->
 		<mvc:message-converters>
-			<bean
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="supportedMediaTypes">
-					<list>
-						<value>application/json;charset=UTF-8</value>
-					</list>
-				</property>
-				<property name="prettyPrint" value="true" />
-			</bean>
+			<ref bean="jsonconvert" />
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
+	<bean id="handlerExceptionResolver"
+		class="com.sea.framework.MyAnnotationHandlerMethodExceptionResolver">
+		<property name="defaultErrorView" value="error.jsp" /><!-- 错误页面 -->
+		<property name="messageConverters">
+			<ref bean="jsonconvert" />
+		</property>
+	</bean>
 
 	<mvc:interceptors>
 		<bean class="com.sea.framework.PerformanceInterceptor" />
@@ -49,24 +60,7 @@
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</bean>
 
-
-
-	<bean id="handlerExceptionResolver"
-		class="com.sea.framework.MyAnnotationHandlerMethodExceptionResolver">
-		<property name="defaultErrorView" value="error.jsp" /><!-- 错误页面 -->
-		<property name="messageConverters">
-			<bean
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="supportedMediaTypes">
-					<list>
-						<value>application/json;charset=UTF-8</value>
-					</list>
-				</property>
-				<property name="prettyPrint" value="true" />
-			</bean>
-		</property>
-		<!--见上一篇，有定义过，标有@ResponseBody被此messageConverters输出 -->
-	</bean>
+	
 
 	<!-- 对静态资源文件的访问 -->
 	<mvc:resources mapping="/images/**" location="/images/"
@@ -76,8 +70,6 @@
 	<mvc:resources mapping="/css/**" location="/css/"
 		cache-period="31556926" />
 	<mvc:resources mapping="/html/**" location="/html/"
-		cache-period="31556926" />
-		<mvc:resources mapping="/apidocs/**" location="/apidocs/"
 		cache-period="31556926" />
 
 </beans> 

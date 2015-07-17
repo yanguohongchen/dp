@@ -1,16 +1,10 @@
 package com.sea.framework;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.google.gson.Gson;
-import com.sea.exception.BusinessException;
 
 public class ExceptionHandler implements HandlerExceptionResolver
 {
@@ -70,6 +64,10 @@ public class ExceptionHandler implements HandlerExceptionResolver
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 	{
+		
+		
+		return new ModelAndView().addObject("error", ex.getMessage()).addObject("code", "1");
+		/*
 
 		if (!(request.getHeader("accept").indexOf("application/json") > -1 || (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").indexOf("XMLHttpRequest") > -1) || request
 				.getParameter("callback") != null))
@@ -111,6 +109,6 @@ public class ExceptionHandler implements HandlerExceptionResolver
 			}
 		}
 		return null;
-	}
+	*/}
 
 }

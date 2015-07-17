@@ -34,8 +34,6 @@ import com.sea.user.api.IUserService;
 import com.sea.user.model.UserEntity;
 import com.sea.user.parameter.UserAdd;
 import com.sea.user.parameter.UserAddParrmeter;
-import com.sea.user.parameter.UserAddParrmeter2;
-import com.wordnik.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -57,19 +55,12 @@ public class UserAction extends BaseAction
 		msgResult.setReturnData(user);
 		return msgResult;
 	}
-	
-	
+
 	@ResponseBody
 	@RequestMapping(value = "userAdd", method = RequestMethod.GET)
-	@ApiOperation(notes="用户添加",value="用户添加")
-	public MsgResult UserAdd(@Valid UserAddParrmeter userAddParrmeter,BindingResult result) throws IllegalAccessException, InvocationTargetException, BusinessException
+	public MsgResult UserAdd(@Valid UserAddParrmeter userAddParrmeter) throws IllegalAccessException, InvocationTargetException, BusinessException
 	{
-		if(result.hasErrors())
-		{
-			FieldError fieldError = result.getFieldError();
-			throw new BusinessException("字段"+fieldError.getField()+":"+fieldError.getDefaultMessage());
-		}
-		
+
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userAddParrmeter, userEntity);
 		userService.save(userEntity);
@@ -77,34 +68,24 @@ public class UserAction extends BaseAction
 		msgResult.setReturnData(userEntity);
 		return msgResult;
 	}
-	
-	
+
 	@ResponseBody
 	@RequestMapping(value = "userAddValidated", method = RequestMethod.GET)
-	public UserEntity UserAddValidated(@Validated({UserAdd.class}) UserAddParrmeter userAddParrmeter,BindingResult result) throws IllegalAccessException, InvocationTargetException, BusinessException
+	public MsgResult UserAddValidated(@Validated({ UserAdd.class }) UserAddParrmeter userAddParrmeter, BindingResult result) throws IllegalAccessException, InvocationTargetException,
+			BusinessException
 	{
-		if(result.hasErrors())
+		if (result.hasErrors())
 		{
 			FieldError fieldError = result.getFieldError();
-			throw new BusinessException(fieldError.getField()+":"+fieldError.getDefaultMessage());
+			throw new BusinessException(fieldError.getField() + ":" + fieldError.getDefaultMessage());
 		}
-		
+
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userAddParrmeter, userEntity);
 		userService.save(userEntity);
-		return userEntity;
-	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value = "userAddValidated2", method = RequestMethod.GET)
-	public UserEntity UserAddValidated2(UserAddParrmeter2 userAddParrmeter) throws IllegalAccessException, InvocationTargetException, BusinessException
-	{
-		
-		UserEntity userEntity = new UserEntity();
-		BeanUtils.copyProperties(userAddParrmeter, userEntity);
-		userService.save(userEntity);
-		return userEntity;
+		MsgResult msgResult = new MsgResult();
+		msgResult.setReturnData(userEntity);
+		return msgResult;
 	}
 
 	@ResponseBody
@@ -125,6 +106,7 @@ public class UserAction extends BaseAction
 		return user;
 	}
 
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
 	public MsgResult getList() throws Exception
