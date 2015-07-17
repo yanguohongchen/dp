@@ -73,6 +73,7 @@ public class UserAction extends BaseAction
 	@RequestMapping(value = "userAddValidated", method = RequestMethod.GET)
 	public MsgResult UserAddValidated(@Validated({ UserAdd.class }) UserAddParrmeter userAddParrmeter, BindingResult result) throws IllegalAccessException, InvocationTargetException,
 			BusinessException
+
 	{
 		if (result.hasErrors())
 		{
