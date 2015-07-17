@@ -36,7 +36,7 @@ public class PerformanceInterceptor implements HandlerInterceptor
 		{
 			long requestStrartTime = System.currentTimeMillis();
 			 request.setAttribute("startTime", requestStrartTime);
-			logger.debug("URI:" + request.getRequestURI() + "，开始时间 :" + df.format(new Date()));
+			logger.info("URI:" + request.getRequestURI() + "，开始时间 :" + df.format(new Date()));
 		}
 		return true;
 	}
@@ -56,8 +56,8 @@ public class PerformanceInterceptor implements HandlerInterceptor
 			long requestEndTime = System.currentTimeMillis();
 			long requestStrartTime = (Long) request.getAttribute("startTime");
 			long requestTime = requestEndTime - requestStrartTime;
-			logger.debug("URI:" + request.getRequestURI() + "，结束时间 :" + df.format(new Date()));
-			logger.debug("URI:" + request.getRequestURI() + "，请求时间：" + String.valueOf(requestTime) + " ms");
+			logger.info("URI:" + request.getRequestURI() + "，结束时间 :" + df.format(new Date()));
+			logger.info("URI:" + request.getRequestURI() + "，请求时间：" + String.valueOf(requestTime) + " ms");
 		}
 
 	}
