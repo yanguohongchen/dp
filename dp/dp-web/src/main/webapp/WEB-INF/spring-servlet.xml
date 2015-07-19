@@ -71,5 +71,7 @@
 		cache-period="31556926" />
 	<mvc:resources mapping="/html/**" location="/html/"
 		cache-period="31556926" />
+	<mvc:resources mapping="/apidocs/**" location="/apidocs/"
+		cache-period="31556926" />
 
 </beans> 
