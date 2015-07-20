@@ -67,7 +67,7 @@ public class UserAction
 		msgResult.setReturnData(userEntity);
 		return msgResult;
 	}
-
+	
 	@ResponseBody
 	@RequestMapping(value = "userAddValidated", method = RequestMethod.GET)
 	public MsgResult UserAddValidated(@Validated({ UserAdd.class }) UserAddParrmeter userAddParrmeter, BindingResult result) throws IllegalAccessException, InvocationTargetException,
