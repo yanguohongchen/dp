@@ -773,7 +773,41 @@ var App = function()
 	{
 		Base.loadRes(1, "menu.html", function(html)
 		{
+			//将获取到内容，填充到网页中
 			$("#sidebar_menu").html(html);
+			
+			
+			//根据url选择菜单
+			var url = window.location.href;
+			$("#sidebar_menu ul>li>a").each(function(){
+				
+				var page_url = $(this).attr("href");
+				
+				if(url.indexOf(page_url)!=-1)
+				{
+					$(this).parent().addClass("active");
+				}
+				
+			});
+			
+			
+			
+			$("#sidebar_menu ul>li>ul>li>a").each(function(){
+				
+				var page_url = $(this).attr("href");
+				
+				if(url.indexOf(page_url)!=-1)
+				{
+					$(this).parent().addClass("active");
+					$(this).parent().parent().parent().addClass("active");
+					$("#sidebar_menu ul>li>a>span[class*='arrow']").addClass("open");
+				}
+			});
+			
+			
+			
+			
+			
 		});
 		
 	}
@@ -783,24 +817,6 @@ var App = function()
 		{
 			$("#page_head").html(html);
 		});
-	}
-	//根据url选择菜单
-	var chooseMenu = function()
-	{
-		var url = window.location.href;
-		
-		alert($("#sidebar_menu").html());
-		
-		$("#sidebar_menu ul>li").each(function(){
-			
-			alert($(this).attr("class"));
-			
-			// if(url.indexOf(=-1)){
-				// this.parent.addClass("active");
-			// }
-		});
-		
-		
 	}
 	//* END:CORE HANDLERS *//
 
@@ -816,7 +832,6 @@ var App = function()
 			loadMenu();
 			
 			
-			chooseMenu();
 
 			//IMPORTANT!!!: Do not modify the core handlers call order.
 
