@@ -8,7 +8,6 @@ var Index = function()
 
 			App.addResponsiveHandler(function()
 			{
-				Index.initCalendar();
 				jQuery('.vmaps').each(function()
 				{
 					var map = jQuery(this);

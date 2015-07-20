@@ -775,6 +775,7 @@ var App = function()
 		{
 			$("#sidebar_menu").html(html);
 		});
+		
 	}
 	var loadHead = function()
 	{
@@ -787,10 +788,16 @@ var App = function()
 	var chooseMenu = function()
 	{
 		var url = window.location.href;
-		$("ul > li >a").each(function(){
-			if(url.indexOf(this.attr("href")!=-1)){
-				this.parent.addClass("active");
-			}
+		
+		alert($("#sidebar_menu").html());
+		
+		$("#sidebar_menu ul>li").each(function(){
+			
+			alert($(this).attr("class"));
+			
+			// if(url.indexOf(=-1)){
+				// this.parent.addClass("active");
+			// }
 		});
 		
 		
@@ -808,7 +815,7 @@ var App = function()
 			//加载菜单
 			loadMenu();
 			
-			//根据url选择菜单,并初始化信息
+			
 			chooseMenu();
 
 			//IMPORTANT!!!: Do not modify the core handlers call order.
