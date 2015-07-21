@@ -381,10 +381,10 @@ var App = function()
 					}
 					$('.sidebar-search').addClass("open");
 				} else {
-					window.location.href = "extra_search.html";
+					$("#searchButton").click(searchMenu);
 				}
 			} else {
-				window.location.href = "extra_search.html";
+				$("#searchButton").click(searchMenu);
 			}
 		});
 	}
@@ -796,7 +796,7 @@ var App = function()
 						//替换page 标题
 						$("#page_title_name").html(menu.html());
 						//TODO:此处替换项目名
-						$("head > title").html("项目名-"+menu.html());
+						$("head > title").html("项目名-" + menu.html());
 						//这里只处理了俩层目录逻辑
 						if (menuGroup.html() != null) {
 							var ht = "<li><a href='javascript:void(0);'>" + menuGroup.html() + "</a><i class='icon-angle-right'></li>";
@@ -807,6 +807,8 @@ var App = function()
 							var ht = "<li><a href='" + menu.attr("href") + "'>" + menu.html() + "</a></i></li>";
 							$("#page_tltle_style").before(ht);
 						}
+
+						// $("#searchButton").click(searchMenu);
 
 						if (initCallBack != null) {
 							initCallBack();
@@ -819,6 +821,23 @@ var App = function()
 		});
 
 	}
+	var searchMenu = function()
+	{
+
+		var searchMenuText = $("#searchMenuText").val();
+
+		if (searchMenuText != "") {
+
+			$("#sidebar_menu li").removeClass("active");
+
+			$("#sidebar_menu a:contains(" + searchMenuText + ")").each(function()
+			{
+				$(this).parents("li").addClass("active");
+				$(this).parent().parent().prevAll("a").find("span[class*='arrow']").addClass("open");
+			});
+		}
+
+	}
 	var loadHead = function()
 	{
 		Base.loadRes(1, "head.html", function(html)
@@ -826,7 +845,6 @@ var App = function()
 			$("#header").html(html);
 		});
 	}
-	
 	var loadFooter = function()
 	{
 		Base.loadRes(1, "footer.html", function(html)
@@ -834,8 +852,6 @@ var App = function()
 			$("#footer").html(html);
 		});
 	}
-	
-	
 	var initCore = function()
 	{
 		//IMPORTANT!!!: Do not modify the core handlers call order.
@@ -899,7 +915,7 @@ var App = function()
 			loadHead();
 			//加载菜单
 			loadMenu(initCore);
-			
+
 			loadFooter();
 
 		},
