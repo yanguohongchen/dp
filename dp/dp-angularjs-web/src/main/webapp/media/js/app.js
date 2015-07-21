@@ -795,20 +795,20 @@ var App = function()
 
 						//替换page 标题
 						$("#page_title_name").html(menu.html());
-						
-						
-						if(menuGroup.html()!=null){
-								var ht = "<li><a href='javascript:void(0);'>"+menuGroup.html()+"</a><i class='icon-angle-right'></li>";
-								$("#page_tltle_style").before(ht);
-								ht = "<li><a href='"+menu.attr("href")+"'>"+menu.html()+"</a></i></li>";
-								$("#page_tltle_style").before(ht);
-								
-						}else{
-							ht = "<li><a href='#'>"+menu.html()+"</a></li>";
+						//TODO:此处替换项目名
+						$("head > title").html("项目名-"+menu.html());
+						//这里只处理了俩层目录逻辑
+						if (menuGroup.html() != null) {
+							var ht = "<li><a href='javascript:void(0);'>" + menuGroup.html() + "</a><i class='icon-angle-right'></li>";
+							$("#page_tltle_style").before(ht);
+							ht = "<li><a href='" + menu.attr("href") + "'>" + menu.html() + "</a></i></li>";
+							$("#page_tltle_style").before(ht);
+						} else {
+							var ht = "<li><a href='" + menu.attr("href") + "'>" + menu.html() + "</a></i></li>";
 							$("#page_tltle_style").before(ht);
 						}
-						
-						if(initCallBack!=null){
+
+						if (initCallBack != null) {
 							initCallBack();
 						}
 					});
@@ -826,6 +826,16 @@ var App = function()
 			$("#header").html(html);
 		});
 	}
+	
+	var loadFooter = function()
+	{
+		Base.loadRes(1, "footer.html", function(html)
+		{
+			$("#footer").html(html);
+		});
+	}
+	
+	
 	var initCore = function()
 	{
 		//IMPORTANT!!!: Do not modify the core handlers call order.
@@ -889,6 +899,8 @@ var App = function()
 			loadHead();
 			//加载菜单
 			loadMenu(initCore);
+			
+			loadFooter();
 
 		},
 
