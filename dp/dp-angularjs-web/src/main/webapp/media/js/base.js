@@ -145,12 +145,12 @@ var Base = function()
 			},
 			error : function(jqXHR, textStatus, errorThrown)
 			{
-				var info = "";
-				info += "网络请求错误:\n\n";
-				info += "url :" + _getRequestUrl(serverIndex) + action + "\n\n";
-				info += "status :" + XMLHttpRequest.status + "\n\n";
-				info += "textStatus :" + textStatus + "\n\n";
-				alert(info);
+				// var info = "";
+				// info += "网络请求错误:\n\n";
+				// info += "url :" + _getRequestUrl(serverIndex) + action + "\n\n";
+				// info += "status :" + XMLHttpRequest.status + "\n\n";
+				// info += "textStatus :" + textStatus + "\n\n";
+				// alert(info);
 			},
 		});
 	};

@@ -60,6 +60,7 @@ public class UserAction
 	public MsgResult UserAdd(@Valid UserAddParrmeter userAddParrmeter) throws IllegalAccessException, InvocationTargetException, BusinessException
 	{
 
+		
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userAddParrmeter, userEntity);
 		userService.save(userEntity);

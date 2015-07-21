@@ -769,54 +769,113 @@ var App = function()
 			});
 		}
 	}
-	var loadMenu = function()
+	var loadMenu = function(initCallBack)
 	{
 		Base.loadRes(1, "menu.html", function(html)
 		{
 			//将获取到内容，填充到网页中
 			$("#sidebar_menu").html(html);
-			
-			
+
 			//根据url选择菜单
 			var url = window.location.href;
-			$("#sidebar_menu ul>li>a").each(function(){
-				
+			$("#sidebar_menu a").each(function()
+			{
 				var page_url = $(this).attr("href");
-				
-				if(url.indexOf(page_url)!=-1)
-				{
-					$(this).parent().addClass("active");
+				if (url.indexOf(page_url) != -1) {
+					$(this).parents("li").addClass("active");
+					$(this).parent().parent().prevAll("a").find("span[class*='arrow']").addClass("open");
+
+					var menu = $(this);
+					var menuGroup = $(this).parent().parent().prevAll("a").find("span[class*='title']");
+
+					//加载页面内容头信息
+					Base.loadRes(1, "page_header.html", function(html)
+					{
+						$("#page_header").html(html);
+
+						//替换page 标题
+						$("#page_title_name").html(menu.html());
+						
+						
+						if(menuGroup.html()!=null){
+								var ht = "<li><a href='javascript:void(0);'>"+menuGroup.html()+"</a><i class='icon-angle-right'></li>";
+								$("#page_tltle_style").before(ht);
+								ht = "<li><a href='"+menu.attr("href")+"'>"+menu.html()+"</a></i></li>";
+								$("#page_tltle_style").before(ht);
+								
+						}else{
+							ht = "<li><a href='#'>"+menu.html()+"</a></li>";
+							$("#page_tltle_style").before(ht);
+						}
+						
+						if(initCallBack!=null){
+							initCallBack();
+						}
+					});
+
 				}
-				
 			});
-			
-			
-			
-			$("#sidebar_menu ul>li>ul>li>a").each(function(){
-				
-				var page_url = $(this).attr("href");
-				
-				if(url.indexOf(page_url)!=-1)
-				{
-					$(this).parent().addClass("active");
-					$(this).parent().parent().parent().addClass("active");
-					$("#sidebar_menu ul>li>a>span[class*='arrow']").addClass("open");
-				}
-			});
-			
-			
-			
-			
-			
+
 		});
-		
+
 	}
 	var loadHead = function()
 	{
 		Base.loadRes(1, "head.html", function(html)
 		{
-			$("#page_head").html(html);
+			$("#header").html(html);
 		});
+	}
+	var initCore = function()
+	{
+		//IMPORTANT!!!: Do not modify the core handlers call order.
+
+		//core handlers
+		handleInit();
+		handleResponsiveOnResize();
+		// set and handle responsive
+		handleUniform();
+		handleScrollers();
+		// handles slim scrolling contents
+		handleResponsiveOnInit();
+		// handler responsive elements on page load
+
+		//layout handlers
+		handleFixedSidebar();
+		// handles fixed sidebar menu
+		handleFixedSidebarHoverable();
+		// handles fixed sidebar on hover effect
+		handleSidebarMenu();
+		// handles main menu
+		handleHorizontalMenu();
+		// handles horizontal menu
+		handleSidebarToggler();
+		// handles sidebar hide/show
+		handleFixInputPlaceholderForIE();
+		// fixes/enables html5 placeholder attribute for IE9, IE8
+		handleGoTop();
+		//handles scroll to top functionality in the footer
+		handleTheme();
+		// handles style customer tool
+
+		//ui component handlers
+		handlePortletTools();
+		// handles portlet action bar functionality(refresh, configure, toggle, remove)
+		handleDropdowns();
+		// handle dropdowns
+		handleTabs();
+		// handle tabs
+		handleTooltips();
+		// handle bootstrap tooltips
+		handlePopovers();
+		// handles bootstrap popovers
+		handleAccordions();
+		//handles accordions
+		handleChoosenSelect();
+		// handles bootstrap chosen dropdowns
+
+		App.addResponsiveHandler(handleChoosenSelect);
+		// reinitiate chosen dropdown on main content resize. disable this line if you don't really use chosen dropdowns.
 	}
 	//* END:CORE HANDLERS *//
 
@@ -829,58 +888,8 @@ var App = function()
 			//加载顶部信息
 			loadHead();
 			//加载菜单
-			loadMenu();
-			
-			
+			loadMenu(initCore);
 
-			//IMPORTANT!!!: Do not modify the core handlers call order.
-
-			//core handlers
-			handleInit();
-			handleResponsiveOnResize();
-			// set and handle responsive
-			handleUniform();
-			handleScrollers();
-			// handles slim scrolling contents
-			handleResponsiveOnInit();
-			// handler responsive elements on page load
-
-			//layout handlers
-			handleFixedSidebar();
-			// handles fixed sidebar menu
-			handleFixedSidebarHoverable();
-			// handles fixed sidebar on hover effect
-			handleSidebarMenu();
-			// handles main menu
-			handleHorizontalMenu();
-			// handles horizontal menu
-			handleSidebarToggler();
-			// handles sidebar hide/show
-			handleFixInputPlaceholderForIE();
-			// fixes/enables html5 placeholder attribute for IE9, IE8
-			handleGoTop();
-			//handles scroll to top functionality in the footer
-			handleTheme();
-			// handles style customer tool
-
-			//ui component handlers
-			handlePortletTools();
-			// handles portlet action bar functionality(refresh, configure, toggle, remove)
-			handleDropdowns();
-			// handle dropdowns
-			handleTabs();
-			// handle tabs
-			handleTooltips();
-			// handle bootstrap tooltips
-			handlePopovers();
-			// handles bootstrap popovers
-			handleAccordions();
-			//handles accordions
-			handleChoosenSelect();
-			// handles bootstrap chosen dropdowns
-
-			App.addResponsiveHandler(handleChoosenSelect);
-			// reinitiate chosen dropdown on main content resize. disable this line if you don't really use chosen dropdowns.
 		},
 
 		fixContentHeight : function()
