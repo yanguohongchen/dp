@@ -373,19 +373,7 @@ var App = function()
 		{
 			e.preventDefault();
 
-			if ($('body').hasClass("page-sidebar-closed")) {
-				if ($('.sidebar-search').hasClass('open') == false) {
-					if ($('.page-sidebar-fixed').size() === 1) {
-						$('.page-sidebar .sidebar-toggler').click();
-						//trigger sidebar toggle button
-					}
-					$('.sidebar-search').addClass("open");
-				} else {
-					$("#searchButton").click(searchMenu);
-				}
-			} else {
 				$("#searchButton").click(searchMenu);
-			}
 		});
 	}
 	var handleHorizontalMenu = function()
