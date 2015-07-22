@@ -358,15 +358,6 @@ var App = function()
 			$('.sidebar-search').removeClass("open");
 		});
 
-		// handle the search query submit on enter press
-		$('.page-sidebar').on('keypress', '.sidebar-search input', function(e)
-		{
-			if (e.which == 13) {
-				window.location.href = "extra_search.html";
-				return false;
-				//<---- Add this line
-			}
-		});
 
 		// handle the search submit
 		$('.sidebar-search .submit').on('click', function(e)
