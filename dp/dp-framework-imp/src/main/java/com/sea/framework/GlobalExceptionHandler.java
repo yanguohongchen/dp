@@ -26,7 +26,7 @@ public class GlobalExceptionHandler
 			ex.printStackTrace();
 		}
 
-		return new ModelAndView().addObject("error", ex.getMessage());
+		return new ModelAndView().addObject("error", ex.getMessage()).addObject("code","1");
 	}
 
 	@ExceptionHandler(BusinessException.class)
@@ -48,7 +48,7 @@ public class GlobalExceptionHandler
 		BindingResult bindingResult = ex.getBindingResult();
 
 		FieldError fieldError = bindingResult.getFieldError();
-		return new ModelAndView().addObject("error", fieldError.getField() + ":" + fieldError.getDefaultMessage());
+		return new ModelAndView().addObject("error", fieldError.getField() + ":" + fieldError.getDefaultMessage()).addObject("code","1");
 	}
 
 }
