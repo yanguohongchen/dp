@@ -359,6 +359,7 @@ var App = function()
 		});
 
 
+
 		// handle the search submit
 		$('.sidebar-search .submit').on('click', function(e)
 		{
