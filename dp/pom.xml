@@ -17,6 +17,8 @@
 		<module>dp-dubboDemo-api</module>
 		<module>dp-dubboDemo-consumer</module>
 		<module>dp-angularjs-web</module>
+		<module>dp-framework-dao</module>
+		<module>dp-framework-mybatis</module>
 	</modules>
 
 

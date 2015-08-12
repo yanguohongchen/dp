@@ -6,7 +6,6 @@ import java.util.List;
 /**
  * 基于Mybatis的基础DAO接口
  * 
- * @author 赵士杰
  * 
  * @param <T>
  *            业务实体类型

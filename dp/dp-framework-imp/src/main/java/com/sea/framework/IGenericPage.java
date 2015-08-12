@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * 支持泛型的分页数据接口
  * 
- * @author 赵士杰
  *
  * @param <T>
  */
