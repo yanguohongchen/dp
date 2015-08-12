@@ -60,7 +60,6 @@ public class UserAction
 	public MsgResult UserAdd(@Valid UserAddParrmeter userAddParrmeter) throws IllegalAccessException, InvocationTargetException, BusinessException
 	{
 
-		
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userAddParrmeter, userEntity);
 		userService.save(userEntity);
@@ -68,11 +67,11 @@ public class UserAction
 		msgResult.setReturnData(userEntity);
 		return msgResult;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "userAddValidated", method = RequestMethod.GET)
-	public MsgResult UserAddValidated(@Validated({ UserAdd.class }) UserAddParrmeter userAddParrmeter, BindingResult result) throws IllegalAccessException, InvocationTargetException,
-			BusinessException
+	public MsgResult UserAddValidated(@Validated({ UserAdd.class }) UserAddParrmeter userAddParrmeter, BindingResult result)
+			throws IllegalAccessException, InvocationTargetException, BusinessException
 
 	{
 		if (result.hasErrors())
@@ -107,7 +106,6 @@ public class UserAction
 		return user;
 	}
 
-	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
 	public MsgResult getList() throws Exception
@@ -175,7 +173,8 @@ public class UserAction
 
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
-	public Person uploadFile(HttpServletResponse response, HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file) throws IOException
+	public Person uploadFile(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException
 	{
 		byte[] bytes = file.getBytes();
 		System.out.println(file.getOriginalFilename());
