@@ -30,4 +30,13 @@ swagger ui
 http://www.mamicode.com/info-detail-525592.html
 
 
+
+权限设计：在前端将各个资源打上id，作为资源id
+
+后端根据id分配权限
+
+
+
+
+
  

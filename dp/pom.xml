@@ -23,6 +23,33 @@
 
 
 
+	<repositories>
+		<repository>
+			<id>public</id>
+			<url>http://172.17.156.61:8081/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>cloudera</id>
+			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+		</repository>
+	</repositories>
+
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<url>http://172.17.156.61:8081/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+
+
 	<!-- 属性声明 -->
 	<properties>
 		<framework.version>1.0-SNAPSHOT</framework.version>
@@ -69,6 +96,13 @@
 			<dependency>
 				<groupId>com.sea</groupId>
 				<artifactId>dp-dubboDemo-provider</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>com.sea</groupId>
+				<artifactId>dp-framework-dao</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -321,6 +355,13 @@
 				<version>15.0</version>
 			</dependency>
 
+			<!-- 汉字转拼音 -->
+
+			<dependency>
+				<groupId>com.github.stuxuhai</groupId>
+				<artifactId>jpinyin</artifactId>
+				<version>1.0</version>
+			</dependency>
 
 
 		</dependencies>
