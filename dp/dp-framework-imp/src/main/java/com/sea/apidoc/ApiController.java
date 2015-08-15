@@ -11,8 +11,6 @@ import com.github.stuxuhai.jpinyin.PinyinHelper;
 public class ApiController
 {
 
-	
-
 	/**
 	 * 根据方法名获取详细信息
 	 * 
@@ -52,6 +50,9 @@ public class ApiController
 		PinyinHelper.convertToPinyinString(str, ",", PinyinFormat.WITH_TONE_NUMBER); // ni3,hao3,shi4,jie4
 		PinyinHelper.convertToPinyinString(str, ",", PinyinFormat.WITHOUT_TONE); // ni,hao,shi,jie
 		PinyinHelper.getShortPinyin(str); // nhsj
+		
+		System.out.println();
+		
 
 	}
 
