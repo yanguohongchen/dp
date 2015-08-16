@@ -1,5 +1,7 @@
 package com.sea.framework;
 
+import java.nio.charset.Charset;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -55,4 +57,14 @@ public class AuthorityAnnotationInterceptor implements HandlerInterceptor
 
 	}
 
+	
+	public static void main(String[] args)
+	{
+		 System.out.println("Default Charset=" + Charset.defaultCharset());  
+	        System.out.println("file.encoding=" + System.getProperty("file.encoding"));  
+	        System.out.println("Default Charset=" + Charset.defaultCharset());  
+	        System.out.println("洪文");
+	        System.out.print("");
+//	        System.out.println("Default Charset in Use=" + getDefaultCharSet());  
+	}
 }
