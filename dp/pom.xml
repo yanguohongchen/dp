@@ -19,6 +19,7 @@
 		<module>dp-angularjs-web</module>
 		<module>dp-framework-dao</module>
 		<module>dp-framework-mybatis</module>
+		<module>dp-api-web</module>
 	</modules>
 
 
