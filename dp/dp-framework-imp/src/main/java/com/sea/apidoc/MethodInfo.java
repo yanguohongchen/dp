@@ -10,6 +10,12 @@ public class MethodInfo
 	 */
 	private String methodName;
 	
+	
+	/**
+	 * 匹配名
+	 */
+	private String mapperName;
+	
 	/**
 	 * 简介
 	 */
@@ -91,6 +97,18 @@ public class MethodInfo
 	public void setSearchKey(String searchKey)
 	{
 		this.searchKey = searchKey;
+	}
+
+
+	public String getMapperName()
+	{
+		return mapperName;
+	}
+
+
+	public void setMapperName(String mapperName)
+	{
+		this.mapperName = mapperName;
 	}
 	
 	
