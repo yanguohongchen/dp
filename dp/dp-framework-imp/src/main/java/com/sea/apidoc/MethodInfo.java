@@ -111,7 +111,7 @@ public class MethodInfo
 		this.mapperName = mapperName;
 	}
 	
-	
+
 	
 	
 }

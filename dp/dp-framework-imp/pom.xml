@@ -222,7 +222,6 @@
 		<dependency>
 			<groupId>com.github.stuxuhai</groupId>
 			<artifactId>jpinyin</artifactId>
-			<version>1.0</version>
 		</dependency>
 
 

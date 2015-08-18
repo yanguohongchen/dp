@@ -23,7 +23,7 @@
 
 
 
-	<repositories>
+	<!-- <repositories>
 		<repository>
 			<id>public</id>
 			<url>http://172.17.156.61:8081/nexus/content/groups/public/</url>
@@ -46,7 +46,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
-	</pluginRepositories>
+	</pluginRepositories> -->
 
 
 

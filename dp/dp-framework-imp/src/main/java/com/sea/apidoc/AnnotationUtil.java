@@ -53,7 +53,7 @@ public class AnnotationUtil
 					// 获取包的物理路径
 					String filePath = URLDecoder.decode(url.getFile(), "UTF-8");
 					System.out.println(filePath);
-					// 以文件的方式扫描整个包下的文件 并添加到集合中
+					// 以文件的方式扫描整个包下的文件 并添加到集合中 
 					findAndAddClassesInPackageByFile(packageName, filePath, recursive, classes);
 				} else if ("jar".equals(protocol))
 				{
