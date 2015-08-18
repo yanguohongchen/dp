@@ -35,7 +35,7 @@ import com.sea.user.parameter.UserAdd;
 import com.sea.user.parameter.UserAddParrmeter;
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value="/user")
 public class UserAction
 {
 
