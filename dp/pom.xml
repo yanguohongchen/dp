@@ -24,30 +24,12 @@
 
 
 
-	<!-- <repositories>
-		<repository>
-			<id>public</id>
-			<url>http://172.17.156.61:8081/nexus/content/groups/public/</url>
-		</repository>
-		<repository>
-			<id>cloudera</id>
-			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-		</repository>
-	</repositories>
-
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>nexus</id>
-			<url>http://172.17.156.61:8081/nexus/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories> -->
+	<!-- <repositories> <repository> <id>public</id> <url>http://172.17.156.61:8081/nexus/content/groups/public/</url> 
+		</repository> <repository> <id>cloudera</id> <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url> 
+		</repository> </repositories> <pluginRepositories> <pluginRepository> <id>nexus</id> 
+		<url>http://172.17.156.61:8081/nexus/content/groups/public</url> <releases> 
+		<enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled> </snapshots> 
+		</pluginRepository> </pluginRepositories> -->
 
 
 
@@ -104,6 +86,12 @@
 			<dependency>
 				<groupId>com.sea</groupId>
 				<artifactId>dp-framework-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sea</groupId>
+				<artifactId>dp-api-web</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

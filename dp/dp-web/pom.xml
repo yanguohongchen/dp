@@ -24,6 +24,11 @@
 			<groupId>com.sea</groupId>
 			<artifactId>dp-dubboDemo-provider</artifactId>
 		</dependency> -->
+		
+		<dependency>
+			<groupId>com.sea</groupId>
+			<artifactId>dp-api-web</artifactId>
+		</dependency>
 
 	</dependencies>
 

@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -41,6 +42,8 @@ public class MyClassUtils
 	 */
 	private String[] obtainClassPaths()
 	{
+		Thread.currentThread().getContextClassLoader().getResource("/");
+		
 		String classpath = System.getProperty("java.class.path");
 		return classpath.split(System.getProperty("path.separator"));
 	}
@@ -306,8 +309,13 @@ public class MyClassUtils
 		// System.out.println(System.getProperty("java.class.path"));
 		// System.out.println(System.getProperty("path.separator"));
 
-		MyClassUtils test = new MyClassUtils();
-		test.discriminateClassPathType(test.obtainClassPaths());
+//		MyClassUtils test = new MyClassUtils();
+//		test.discriminateClassPathType(test.obtainClassPaths());
+
+		 ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		
+		System.out.println(classLoader);
+		
 	}
 
 }

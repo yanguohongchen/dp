@@ -16,6 +16,9 @@
         <dependent-module archiveName="dp-usercenter-api-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dp-usercenter-api/dp-usercenter-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="dp-api-web-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dp-api-web/dp-api-web">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="dp-web"/>
         <property name="java-output-path" value="/dp-web/target/classes"/>
     </wb-module>
