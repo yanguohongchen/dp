@@ -1,9 +1,9 @@
 package com.sea.apidoc;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,6 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.github.stuxuhai.jpinyin.PinyinFormat;
+import com.github.stuxuhai.jpinyin.PinyinHelper;
+
 public class MyClassUtils
 {
 
@@ -23,12 +29,17 @@ public class MyClassUtils
 
 	private Map<String, List<MethodInfo>> methodsInfoMap = new HashMap<String, List<MethodInfo>>();
 
+	public void scanAnnotation()
+	{
+		discriminateClassPathType(obtainClassPaths());
+	}
+
 	/**
 	 * 获取classpath
 	 * 
 	 * @return
 	 */
-	public String[] obtainClassPaths()
+	private String[] obtainClassPaths()
 	{
 		String classpath = System.getProperty("java.class.path");
 		return classpath.split(System.getProperty("path.separator"));
@@ -39,7 +50,7 @@ public class MyClassUtils
 	 * 
 	 * @param classpaths
 	 */
-	public void discriminateClassPathType(String[] classpaths)
+	private void discriminateClassPathType(String[] classpaths)
 	{
 
 		for (String classpath : classpaths)
@@ -48,7 +59,7 @@ public class MyClassUtils
 		}
 	}
 
-	public void handle(String classpath)
+	private void handle(String classpath)
 	{
 		if (isClass(classpath))
 		{
@@ -64,7 +75,7 @@ public class MyClassUtils
 		}
 	}
 
-	public void handleClass(File file)
+	private void handleClass(File file)
 	{
 		try
 		{
@@ -97,9 +108,9 @@ public class MyClassUtils
 		}
 	}
 
-	public void filter(Class<?> clazz)
+	private void filter(Class<?> clazz)
 	{
-		
+
 		String module = "none";
 		if (clazz.getName().contains("com.sea"))
 		{
@@ -112,42 +123,23 @@ public class MyClassUtils
 					RequestMapping requestMappingAnnotion = clazz.getAnnotation(RequestMapping.class);
 					module = requestMappingAnnotion.value()[0];
 				}
-				
+
 				for (Method method : clazz.getMethods())
 				{
 					if (method.isAnnotationPresent(RequestMapping.class))
 					{
-						MethodInfo methodInfo = new MethodInfo();
-						methodInfo.setModule(module);
-						
-						//获取方法名
-						methodInfo.setMethodName(method.getName());
-						
-						//获取映射名
-						String methodMappedName = method.getAnnotation(RequestMapping.class).value()[0];
-						methodInfo.setMapperName(methodMappedName);
-						
-						//返回类型
-						Class<?> returnType = method.getReturnType();
-						
-						methodInfo.setReturnType(returnType.getName());
-						
-						
-						//参数
-						Class<?>[]  parameterTypes= method.getParameterTypes();
-						for(Class<?> param:parameterTypes){
+						MethodInfo methodInfo = fillMethodInfo(module, method);
+
+						//添加到方法list中
+						if (module.equals("none"))
+						{
+							methodsInfoList.add(methodInfo);
+						} else
+						{
+							List<MethodInfo> list = new ArrayList<>();
+							list.add(methodInfo);
+							methodsInfoMap.put(module, list);
 						}
-						
-						Type[] genericParameterTypes = method.getGenericParameterTypes();
-						
-						
-						TypeVariable<Method>[] typeParameters = method.getTypeParameters();
-						
-						System.out.println();
-						
-						
-						
-						
 					}
 				}
 			}
@@ -155,7 +147,92 @@ public class MyClassUtils
 		}
 	}
 
-	public void handleFolder(File file)
+	private MethodInfo fillMethodInfo(String module, Method method)
+	{
+		MethodInfo methodInfo = new MethodInfo();
+		methodInfo.setModule(module);
+
+		//获取方法名
+		methodInfo.setMethodName(method.getName());
+
+		//获取映射名
+		String methodMappedName = method.getAnnotation(RequestMapping.class).value()[0];
+		methodInfo.setMapperName(methodMappedName);
+
+		//返回类型
+		Class<?> returnType = method.getReturnType();
+		methodInfo.setReturnType(returnType.getName());
+
+		//search key
+		methodInfo.setSearchKey(methodInfo.getMethodName() + methodInfo.getModule() + "/" + methodInfo.getMapperName());
+
+		//方法描述
+		if (method.isAnnotationPresent(Description.class))
+		{
+			methodInfo.setSummary(method.getAnnotation(Description.class).value());
+
+			String searchkeypinyin = PinyinHelper.convertToPinyinString(methodInfo.getSearchKey(), "", PinyinFormat.WITHOUT_TONE);
+			String searchkeyszm = PinyinHelper.getShortPinyin(methodInfo.getSearchKey());
+
+			// search key (mapper地址+接口名称+描述+描述拼音+描述首字母)
+			methodInfo.setSearchKey(methodInfo.getSearchKey() + methodInfo.getSummary() + searchkeypinyin + searchkeyszm);
+
+		}
+
+		try
+		{
+			//json数据格式返回值
+			Object returnObject = returnType.newInstance();
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+			String gsonString = mapper.writeValueAsString(returnObject);
+			methodInfo.setReturnData(gsonString);
+
+		} catch (InstantiationException | IllegalAccessException | JsonProcessingException e)
+		{
+			e.printStackTrace();
+		}
+
+		//参数信息
+		List<Param> params = new ArrayList<Param>();
+		Class<?>[] parameterTypes = method.getParameterTypes();
+		for (Class<?> param : parameterTypes)
+		{
+			for (Field field : param.getDeclaredFields())
+			{
+				params.add(fillFieldInfo(field));
+			}
+		}
+		methodInfo.setParams(params);
+		return methodInfo;
+	}
+
+	private Param fillFieldInfo(Field field)
+	{
+		Param para = new Param();
+		para.setParamType(field.getType().getName());
+		para.setParamName(field.getName());
+
+		for (Annotation annotation : field.getAnnotations())
+		{
+			if (annotation.annotationType().getName().contains("javax.validation")
+					|| annotation.annotationType().getName().contains("org.hibernate.validator"))//属于验证的注解
+			{
+				para.getFormats().add(annotation.toString());
+			}
+		}
+
+		//字段描述填充
+		if (field.isAnnotationPresent(Description.class))
+		{
+			para.setSummary(field.getAnnotation(Description.class).value());
+		}
+
+		return para;
+
+	}
+
+	private void handleFolder(File file)
 	{
 		for (File childFile : file.listFiles())
 		{
@@ -163,7 +240,7 @@ public class MyClassUtils
 		}
 	}
 
-	public void handleJar(File file)
+	private void handleJar(File file)
 	{
 		try
 		{
@@ -180,7 +257,7 @@ public class MyClassUtils
 		}
 	}
 
-	public boolean isFolder(String classpath)
+	private boolean isFolder(String classpath)
 	{
 		if (new File(classpath).isDirectory())
 		{
@@ -191,7 +268,7 @@ public class MyClassUtils
 		}
 	}
 
-	public boolean isClass(String classpath)
+	private boolean isClass(String classpath)
 	{
 		if (classpath.endsWith(".class"))
 		{
@@ -202,7 +279,7 @@ public class MyClassUtils
 		}
 	}
 
-	public boolean isJar(String classpath)
+	private boolean isJar(String classpath)
 	{
 		if (classpath.endsWith(".jar"))
 		{
@@ -211,6 +288,16 @@ public class MyClassUtils
 		{
 			return false;
 		}
+	}
+
+	public List<MethodInfo> getMethodsInfoList()
+	{
+		return methodsInfoList;
+	}
+
+	public Map<String, List<MethodInfo>> getMethodsInfoMap()
+	{
+		return methodsInfoMap;
 	}
 
 	public static void main(String[] args)

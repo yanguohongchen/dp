@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sea.apidoc.Description;
 import com.sea.exception.BusinessException;
 import com.sea.framework.MsgResult;
 import com.sea.user.api.IUserService;
@@ -34,6 +35,7 @@ import com.sea.user.model.UserEntity;
 import com.sea.user.parameter.UserAdd;
 import com.sea.user.parameter.UserAddParrmeter;
 
+@Description(value = "用户模块控制器")
 @Controller
 @RequestMapping(value="/user")
 public class UserAction

@@ -19,6 +19,9 @@
         <dependent-module archiveName="dp-dubboDemo-provider-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dp-dubboDemo-provider/dp-dubboDemo-provider">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="dp-dubboDemo-api-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dp-dubboDemo-api/dp-dubboDemo-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="dp-angularjs-web"/>
         <property name="java-output-path" value="/dp-angularjs-web/target/classes"/>
     </wb-module>
