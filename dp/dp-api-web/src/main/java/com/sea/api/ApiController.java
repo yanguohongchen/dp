@@ -21,6 +21,7 @@ public class ApiController
 	@RequestMapping("obtainModuleMethodInfo")
 	public List<MethodInfo> obtainModuleMethodInfo(String moduleName)
 	{
+		
 		return apiService.obtainModuleMethodInfo(moduleName);
 	}
 
@@ -30,4 +31,6 @@ public class ApiController
 	{
 		return apiService.obtainMethodInfo();
 	}
+	
+	
 }

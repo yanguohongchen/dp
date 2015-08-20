@@ -27,5 +27,12 @@ public class ApiService
 	{
 		return myclass.getMethodsInfoList();
 	}
+	
+	
+	public static void main(String[] args)
+	{
+		MyClassUtils myclass = new MyClassUtils();
+		myclass.scanAnnotation();
+	}
 
 }

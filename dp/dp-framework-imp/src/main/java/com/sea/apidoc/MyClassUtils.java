@@ -30,9 +30,16 @@ public class MyClassUtils
 
 	private Map<String, List<MethodInfo>> methodsInfoMap = new HashMap<String, List<MethodInfo>>();
 
+	private String[] classpaths;
+
+	public MyClassUtils()
+	{
+		classpaths = obtainClassPaths();
+	}
+
 	public void scanAnnotation()
 	{
-		discriminateClassPathType(obtainClassPaths());
+		discriminateClassPathType(classpaths);
 	}
 
 	/**
@@ -42,10 +49,21 @@ public class MyClassUtils
 	 */
 	private String[] obtainClassPaths()
 	{
-		Thread.currentThread().getContextClassLoader().getResource("/");
-		
-		String classpath = System.getProperty("java.class.path");
-		return classpath.split(System.getProperty("path.separator"));
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		URL url = classLoader.getResource("");
+
+		System.out.println("========================================");
+
+		System.out.println("classpath:" + url.getPath());
+
+		System.out.println("========================================");
+
+		String[] urlArr = new String[] { url.getPath() };
+
+		return urlArr;
+
+		//		String classpath = System.getProperty("java.class.path");
+		//		return classpath.split(System.getProperty("path.separator"));
 	}
 
 	/**
@@ -85,9 +103,9 @@ public class MyClassUtils
 			String className = file.getPath();
 
 			// 去除实际目录中的前缀
-			for (String classpath : obtainClassPaths())
+			for (String classpath : classpaths)
 			{
-				className = className.replace(classpath + File.separator, "");
+				className = className.replace(classpath, "");
 			}
 			className = className.replace(File.separator, ".").replace(".class", "");
 
@@ -127,6 +145,7 @@ public class MyClassUtils
 					module = requestMappingAnnotion.value()[0];
 				}
 
+				List<MethodInfo> list = new ArrayList<>();
 				for (Method method : clazz.getMethods())
 				{
 					if (method.isAnnotationPresent(RequestMapping.class))
@@ -137,14 +156,16 @@ public class MyClassUtils
 						if (module.equals("none"))
 						{
 							methodsInfoList.add(methodInfo);
+							System.out.println(methodInfo.getModule() + ":" + methodInfo.getMethodName());
 						} else
 						{
-							List<MethodInfo> list = new ArrayList<>();
 							list.add(methodInfo);
-							methodsInfoMap.put(module, list);
+							System.out.println(methodInfo.getModule() + ":" + methodInfo.getMethodName());
 						}
 					}
 				}
+				methodsInfoMap.put(module, list);
+				System.out.println();
 			}
 
 		}
@@ -186,12 +207,9 @@ public class MyClassUtils
 		{
 			//json数据格式返回值
 			Object returnObject = returnType.newInstance();
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			String gsonString = mapper.writeValueAsString(returnObject);
-			methodInfo.setReturnData(gsonString);
+			methodInfo.setReturnData(returnObject);
 
-		} catch (InstantiationException | IllegalAccessException | JsonProcessingException e)
+		} catch (InstantiationException | IllegalAccessException  e)
 		{
 			e.printStackTrace();
 		}
@@ -230,7 +248,7 @@ public class MyClassUtils
 		{
 			para.setSummary(field.getAnnotation(Description.class).value());
 		}
-
+		
 		return para;
 
 	}
@@ -309,13 +327,13 @@ public class MyClassUtils
 		// System.out.println(System.getProperty("java.class.path"));
 		// System.out.println(System.getProperty("path.separator"));
 
-//		MyClassUtils test = new MyClassUtils();
-//		test.discriminateClassPathType(test.obtainClassPaths());
+		//		MyClassUtils test = new MyClassUtils();
+		//		test.discriminateClassPathType(test.obtainClassPaths());
 
-		 ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-		
-		System.out.println(classLoader);
-		
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		URL url = classLoader.getResource("");
+		System.out.println(url.getPath());
+
 	}
 
 }

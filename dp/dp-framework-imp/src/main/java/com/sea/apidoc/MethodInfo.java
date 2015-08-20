@@ -28,7 +28,7 @@ public class MethodInfo
 	/**
 	 * 返回数据 json格式
 	 */
-	private String returnData;
+	private Object returnData;
 
 	/**
 	 * 返回类型
@@ -68,12 +68,12 @@ public class MethodInfo
 		this.summary = summary;
 	}
 
-	public String getReturnData()
+	public Object getReturnData()
 	{
 		return returnData;
 	}
 
-	public void setReturnData(String returnData)
+	public void setReturnData(Object returnData)
 	{
 		this.returnData = returnData;
 	}

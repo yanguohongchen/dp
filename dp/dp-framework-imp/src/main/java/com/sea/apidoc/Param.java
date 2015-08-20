@@ -26,10 +26,6 @@ public class Param
 	 */
 	private List<String> formats = new ArrayList<String>();
 
-	/**
-	 * 参数json类型
-	 */
-	private String paramJson;
 
 	public String getParamType()
 	{
@@ -61,15 +57,6 @@ public class Param
 		this.summary = summary;
 	}
 
-	public String getParamJson()
-	{
-		return paramJson;
-	}
-
-	public void setParamJson(String paramJson)
-	{
-		this.paramJson = paramJson;
-	}
 
 	public List<String> getFormats()
 	{
