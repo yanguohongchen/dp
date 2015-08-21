@@ -1,6 +1,7 @@
 package com.sea.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -18,17 +19,21 @@ public class ApiService
 		myclass.scanAnnotation();
 	}
 
-	public List<MethodInfo> obtainModuleMethodInfo(String moduleName)
+	public List<MethodInfo> obtainModuleMethodInfo(String module)
 	{
-		return myclass.getMethodsInfoMap().get(moduleName);
+		return myclass.getMethodsInfoMap().get(module);
 	}
 
 	public List<MethodInfo> obtainMethodInfo()
 	{
 		return myclass.getMethodsInfoList();
 	}
-	
-	
+
+	public Map<String, List<MethodInfo>> obtainMethodsInfoMap()
+	{
+		return myclass.getMethodsInfoMap();
+	}
+
 	public static void main(String[] args)
 	{
 		MyClassUtils myclass = new MyClassUtils();

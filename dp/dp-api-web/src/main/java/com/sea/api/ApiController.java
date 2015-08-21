@@ -1,6 +1,7 @@
 package com.sea.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,9 @@ public class ApiController
 
 	@ResponseBody
 	@RequestMapping("obtainModuleMethodInfo")
-	public List<MethodInfo> obtainModuleMethodInfo(String moduleName)
+	public List<MethodInfo> obtainModuleMethodInfo(String module)
 	{
-		
-		return apiService.obtainModuleMethodInfo(moduleName);
+		return apiService.obtainModuleMethodInfo(module);
 	}
 
 	@RequestMapping("obtainMethodInfo")
@@ -31,6 +31,12 @@ public class ApiController
 	{
 		return apiService.obtainMethodInfo();
 	}
-	
-	
+
+	@RequestMapping("obtainMethodsInfoMap")
+	@ResponseBody
+	public Map<String, List<MethodInfo>> obtainMethodsInfoMap()
+	{
+		return apiService.obtainMethodsInfoMap();
+	}
+
 }
