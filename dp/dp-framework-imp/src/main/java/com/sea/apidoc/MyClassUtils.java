@@ -192,8 +192,8 @@ public class MyClassUtils
 		{
 			methodInfo.setSummary(method.getAnnotation(Description.class).value());
 
-			String searchkeypinyin = PinyinHelper.convertToPinyinString(methodInfo.getSearchKey(), "", PinyinFormat.WITHOUT_TONE);
-			String searchkeyszm = PinyinHelper.getShortPinyin(methodInfo.getSearchKey());
+			String searchkeypinyin = PinyinHelper.convertToPinyinString(methodInfo.getSummary(), "", PinyinFormat.WITHOUT_TONE);
+			String searchkeyszm = PinyinHelper.getShortPinyin(methodInfo.getSummary());
 
 			// search key (mapper地址+接口名称+描述+描述拼音+描述首字母)
 			methodInfo.setSearchKey(methodInfo.getSearchKey() + methodInfo.getSummary() + searchkeypinyin + searchkeyszm);
@@ -206,7 +206,7 @@ public class MyClassUtils
 			Object returnObject = returnType.newInstance();
 			methodInfo.setReturnData(returnObject);
 
-		} catch (InstantiationException | IllegalAccessException  e)
+		} catch (InstantiationException | IllegalAccessException e)
 		{
 			e.printStackTrace();
 		}
@@ -245,7 +245,7 @@ public class MyClassUtils
 		{
 			para.setSummary(field.getAnnotation(Description.class).value());
 		}
-		
+
 		return para;
 
 	}
@@ -327,9 +327,13 @@ public class MyClassUtils
 		//		MyClassUtils test = new MyClassUtils();
 		//		test.discriminateClassPathType(test.obtainClassPaths());
 
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-		URL url = classLoader.getResource("");
-		System.out.println(url.getPath());
+		//测试
+		MyClassUtils myclass = new MyClassUtils();
+		myclass.scanAnnotation();
+
+		//		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		//		URL url = classLoader.getResource("");
+		//		System.out.println(url.getPath());
 
 	}
 

@@ -34,60 +34,58 @@
 
 		</nav>
 
+		
 		<!-- 主体 -->
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				模块名：
-			</div>
-			<div class="panel-body">
-				<ul class="list-group">
-					<li class="list-group-item">
-						Cras justo odio
-					</li>
-					<li class="list-group-item">
-						Dapibus ac facilisis in
-					</li>
-					<li class="list-group-item">
-						Morbi leo risus
-					</li>
-					<li class="list-group-item">
-						Porta ac consectetur ac
-					</li>
-					<li class="list-group-item">
-						Vestibulum at eros
-					</li>
-				</ul>
-			</div>
+		<div id="content">
+			
 		</div>
-
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				模块名：
-			</div>
-			<div class="panel-body">
-				<ul class="list-group">
-					<li class="list-group-item">
-						Cras justo odio
-					</li>
-					<li class="list-group-item">
-						Dapibus ac facilisis in
-					</li>
-					<li class="list-group-item">
-						Morbi leo risus
-					</li>
-					<li class="list-group-item">
-						Porta ac consectetur ac
-					</li>
-					<li class="list-group-item">
-						Vestibulum at eros
-					</li>
-				</ul>
-			</div>
-		</div>
-
 	</body>
 
-
+	<!-- 模版 -->
+	
+	
+	<script type="text/juicer" id="params_tpl">
+		{@each params as param}
+			<ul class="list-group">
+				  <li class="list-group-item">参数名:${param.paramName}</li>
+				  <li class="list-group-item">参数类型:${param.paramType}</li>
+				  <li class="list-group-item">参数描述:${param.summary}</li>
+				  <li class="list-group-item">参数格式:${param.formats}</li>
+			</ul>
+		{@/each}
+	</script>
+	
+	<script type="text/juicer" id="module_methodinfo_tpl">
+		{@each mapvalue as item}
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					方法名:${item.methodName} 
+				</div>
+				<div class="panel-body">
+					<ul class="list-group" id="${item.methodName}">
+						<li class="list-group-item">
+							 匹配地址:${item.mapperName}
+						</li>
+						<li class="list-group-item">
+							描述:${item.summary}
+						</li>
+						<li class="list-group-item">
+							返回类型:${item.returnType} 
+						</li>
+						<li class="list-group-item">
+							搜索词: ${item.searchKey}
+						</li>
+						<li class="list-group-item">
+							参数:$${item.params|dealParam}
+						</li>
+						<li class="list-group-item">
+							返回json类型 :$${item.returnData|jsonToString}
+						</li>
+					</ul>
+				</div>
+			</div>
+		{@/each}
+	</script>
 	<script src="js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="js/juicer.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/bootstrap.js"></script>

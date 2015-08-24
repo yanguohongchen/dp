@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sea.apidoc.Description;
 import com.sea.apidoc.MethodInfo;
 
 @RestController
@@ -18,6 +19,7 @@ public class ApiController
 	@Autowired
 	private ApiService apiService;
 
+	@Description(value = "获取模块信息")
 	@ResponseBody
 	@RequestMapping("obtainModuleMethodInfo")
 	public List<MethodInfo> obtainModuleMethodInfo(String module)
@@ -32,6 +34,7 @@ public class ApiController
 		return apiService.obtainMethodInfo();
 	}
 
+	@Description(value = "获取模块信息map")
 	@RequestMapping("obtainMethodsInfoMap")
 	@ResponseBody
 	public Map<String, List<MethodInfo>> obtainMethodsInfoMap()

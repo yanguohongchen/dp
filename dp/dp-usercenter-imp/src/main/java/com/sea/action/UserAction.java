@@ -57,6 +57,7 @@ public class UserAction
 		return msgResult;
 	}
 
+	@Description(value = "用户添加")
 	@ResponseBody
 	@RequestMapping(value = "userAdd", method = RequestMethod.GET)
 	public MsgResult UserAdd(@Valid UserAddParrmeter userAddParrmeter) throws IllegalAccessException, InvocationTargetException, BusinessException
