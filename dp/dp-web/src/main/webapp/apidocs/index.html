@@ -47,7 +47,7 @@
 	<script type="text/juicer" id="params_tpl">
 		{@each params as param}
 			<ul class="list-group">
-				  <li class="list-group-item">参数名:${param.paramName}</li>
+				  <li class="list-group-item list-group-item-success">参数名:${param.paramName}</li>
 				  <li class="list-group-item">参数类型:${param.paramType}</li>
 				  <li class="list-group-item">参数描述:${param.summary}</li>
 				  <li class="list-group-item">参数格式:${param.formats}</li>
@@ -76,7 +76,7 @@
 							搜索词: ${item.searchKey}
 						</li>
 						<li class="list-group-item">
-							参数:$${item.params|dealParam}
+							$${item.params|dealParam}
 						</li>
 						<li class="list-group-item">
 							返回json类型 :$${item.returnData|jsonToString}
