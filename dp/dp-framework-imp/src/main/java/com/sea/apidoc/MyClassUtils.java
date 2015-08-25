@@ -211,7 +211,6 @@ public class MyClassUtils
 
 		} catch (InstantiationException | IllegalAccessException e)
 		{
-			e.printStackTrace();
 		}
 
 		//参数信息
