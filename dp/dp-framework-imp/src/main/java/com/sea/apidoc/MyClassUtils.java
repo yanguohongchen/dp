@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -196,7 +199,7 @@ public class MyClassUtils
 			String searchkeyszm = PinyinHelper.getShortPinyin(methodInfo.getSummary());
 
 			// search key (mapper地址+接口名称+描述+描述拼音+描述首字母)
-			methodInfo.setSearchKey(methodInfo.getSearchKey() + methodInfo.getSummary() + searchkeypinyin + searchkeyszm);
+			methodInfo.setSearchKey(methodInfo.getSearchKey()+" " + methodInfo.getSummary()+" " + searchkeypinyin+" " + searchkeyszm);
 
 		}
 
@@ -216,13 +219,32 @@ public class MyClassUtils
 		Class<?>[] parameterTypes = method.getParameterTypes();
 		for (Class<?> param : parameterTypes)
 		{
-			for (Field field : param.getDeclaredFields())
+			if (filterParamterType(param))
 			{
-				params.add(fillFieldInfo(field));
+
+			} else
+			{
+				for (Field field : param.getDeclaredFields())
+				{
+					params.add(fillFieldInfo(field));
+				}
 			}
+
 		}
 		methodInfo.setParams(params);
 		return methodInfo;
+	}
+
+	//过滤参数类型
+	private boolean filterParamterType(Class<?> clazz)
+	{
+		if (clazz.getName().equals(HttpServletResponse.class.getName()))
+		{
+			return true;
+		}else if(clazz.getName().equals(HttpServletRequest.class.getName())){
+			return true;
+		}
+		return false;
 	}
 
 	private Param fillFieldInfo(Field field)

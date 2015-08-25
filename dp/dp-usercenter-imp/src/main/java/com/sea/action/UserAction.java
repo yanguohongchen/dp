@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sea.apidoc.Description;
+import com.sea.apidoc.MyClassUtils;
 import com.sea.exception.BusinessException;
 import com.sea.framework.MsgResult;
 import com.sea.user.api.IUserService;
@@ -37,7 +38,7 @@ import com.sea.user.parameter.UserAddParrmeter;
 
 @Description(value = "用户模块控制器")
 @Controller
-@RequestMapping(value="/user")
+@RequestMapping(value = "/user")
 public class UserAction
 {
 
@@ -165,7 +166,7 @@ public class UserAction
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String handleFormUpload(@RequestParam("name") String name, @RequestParam("file") Part file) throws IOException
+	public String handleFormUpload(String name, Part file) throws IOException
 	{
 		@SuppressWarnings("unused")
 		InputStream inputStream = file.getInputStream();
@@ -195,6 +196,12 @@ public class UserAction
 		person.setName("zhang");
 		person.setAge(22);
 		return person;
+	}
+
+	public static void main(String[] args)
+	{
+		MyClassUtils myclass = new MyClassUtils();
+		myclass.scanAnnotation();
 	}
 
 }

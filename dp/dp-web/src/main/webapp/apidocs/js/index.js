@@ -2,19 +2,23 @@ var Index = function()
 {
 	var methodsInfoMap;
 	var module_methodinfo_tpl_compiled;
+	var formats_tpl_compiled;
 
 	var initJuicerTpl = function()
 	{
 		var params_tpl = $("#params_tpl").html();
 		var module_methodinfo_tpl = $("#module_methodinfo_tpl").html();
+		var formats_tpl = $("#formats_tpl").html();
 
 		//注册自定义函数
 		juicer.register('jsonToString', jsonToString);
 		juicer.register('dealParam', dealParam);
+		juicer.register('dealFormats', dealFormats);
 
 		//编译
 		module_methodinfo_tpl_compiled = juicer(module_methodinfo_tpl);
 		params_tpl_compiled = juicer(params_tpl);
+		formats_tpl_compiled = juicer(formats_tpl);
 	};
 
 	var obtainMethodsInfoMap = function()
@@ -38,9 +42,18 @@ var Index = function()
 		});
 	};
 
-	var dealParam = function( paramJson)
+	var dealFormats = function(formatsJson)
 	{
-		
+		var formats = {
+			formats : formatsJson
+		};
+
+		var html = formats_tpl_compiled.render(formats);
+
+		return html;
+	};
+	var dealParam = function(paramJson)
+	{
 		var params = {
 			params : paramJson
 		};
